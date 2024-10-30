@@ -15,4 +15,5 @@ RUN curl -Lso /usr/bin/ha \
 COPY data/template.gitignore /
 COPY data/run.sh /
 
+# Set shell
 CMD [ "/run.sh" ]
