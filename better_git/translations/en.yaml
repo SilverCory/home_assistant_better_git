@@ -1,0 +1,47 @@
+---
+configuration:
+  git_repository:
+    name: Git Repository
+    description: Git URL to your repository.
+  git_branch:
+    name: Git Branch
+    description: >-
+      Branch name of the Git repo. If left empty, the currently checked out
+      branch will be updated. Leave this as 'master' if you are unsure.
+  git_remote_user:
+    name: Git Remote Username
+    description: >-
+      The username to log in as when accessing the remote repository.
+  git_remote_pass:
+    name: Git Remote Password
+    description: >-
+      The password or token to log in with when accessing the remote repository.
+  git_local_email:
+    name: Git Local Email
+    description: >-
+      The email address that will be used against the changes in the commit.
+  git_local_name:
+    name: Git Local Name
+    description: >-
+      The name that will be used against the changes in the commit.
+  git_ignore_init:
+    name: Git Ignore Init
+    description: >-
+      A list of files to initialise the .gitignore (these files won't be committed or tracked). USED ONLY ON THE REPOSITORY INITIALISATION.
+  restart_auto:
+    name: Auto restart
+    description: >-
+      Restart Home Assistant when the configuration has changed (and is valid).
+  restart_ignore:
+    name: Restart Ignore
+    description: >-
+      When `auto_restart` is enabled, changes to these files will not make HA
+      restart. Full directories to ignore can be specified.
+  repeat_active:
+    name: Repeat Enabled
+    description: >-
+      Shall we repeat the action on the specified interval?
+  repeat_interval:
+    name: Repeat Interval
+    description: >-
+      The interval in seconds to repeat the action.

@@ -1,0 +1,14 @@
+# HA Files
+.HA_VERSION
+.cloud
+.storage
+deps
+nest
+secrets.yaml
+tts
+
+# Logs and Databases
+*.db
+*.db-*
+*.log
+*.log.*

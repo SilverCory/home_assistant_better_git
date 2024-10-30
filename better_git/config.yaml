@@ -1,0 +1,49 @@
+---
+version: 0.0.1
+slug: better-git
+name: Better Git
+description: A better git addon for Home Assistant
+url: https://github.com/silvercory/addons/tree/master
+advanced: true
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+boot: manual
+hassio_api: true
+hassio_role: homeassistant
+image: SilverCory/home-assistant-better-git_{arch}
+init: false
+map:
+  - config:rw
+schema:
+  git_repository: str
+  git_branch: str
+  git_remote_user: str
+  git_remote_pass: password
+  git_local_email: str
+  git_local_name: str
+  git_ignore_init:
+    - str
+  restart_auto: bool
+  restart_ignore:
+      - str
+  repeat_active: bool
+  repeat_interval: int
+options:
+  git_repository: null
+  git_branch: deployed
+  git_remote_user: null
+  git_remote_pass: null
+  git_local_email: null
+  git_local_name: null
+  git_ignore_init: []
+  restart_auto: false
+  restart_ignore:
+    - ui-lovelace.yaml
+    - .gitignore
+  repeat_active: false
+  repeat_interval: 300
+startup: services
