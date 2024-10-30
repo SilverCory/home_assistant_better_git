@@ -2,7 +2,7 @@ ARG BUILD_FROM
 FROM $BUILD_FROM
 
 # Setup base
-RUN apk add --no-cache jq curl git openssh-client
+RUN apk add --no-cache jq curl git openssh-client inotify-tools
 
 # Home Assistant CLI
 ARG BUILD_ARCH

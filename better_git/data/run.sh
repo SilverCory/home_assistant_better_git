@@ -15,7 +15,7 @@ GIT_IGNORE_INIT=$(jq --raw-output ".git_ignore_init[]" $CONFIG_PATH)
 REPEAT_ACTIVE=$(jq --raw-output '.repeat_active' $CONFIG_PATH)
 REPEAT_INTERVAL=$(jq --raw-output '.repeat_interval' $CONFIG_PATH)
 
-RESTART_AUTO=$(jq --raw-output 'restart_enabled' $CONFIG_PATH)
+RESTART_AUTO=$(jq --raw-output 'restart_auto' $CONFIG_PATH)
 RESTART_IGNORED_FILES=$(jq --raw-output '.restart_ignore | join(" ")' $CONFIG_PATH)
 
 # Log Function to log messages with a timestamp and log level
