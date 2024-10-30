@@ -94,17 +94,20 @@ password=${GIT_REMOTE_PASS}
     fi
 }
 
+update-git() {
+      # Set git user
+      git config --global user.email "$GIT_LOCAL_EMAIL"
+      git config --global user.name "$GIT_LOCAL_NAME"
+      log-info "Set git user"
+
+      setup-user-password
+}
 
 # Initialize git repository
 init-git() {
     pushd /config || log-fatal "Failed to change directory to /config"
     git init || log-fatal "Failed to initialize git repository"
     log-info "Initialized git repository"
-
-    # Set git user
-    git config --global user.email "$GIT_LOCAL_EMAIL"
-    git config --global user.name "$GIT_LOCAL_NAME"
-    log-info "Set git user"
 
     # Copy gitignore
     cat template.gitignore >> .gitignore
@@ -114,7 +117,7 @@ init-git() {
     cat "$GIT_IGNORE_INIT" >> .gitignore
     log-info "Added additional files to .gitignore"
 
-    setup-user-password
+    update-git
 
     git remote add origin "$GIT_REPOSITORY"
     git checkout -b "$GIT_BRANCH"
@@ -155,6 +158,7 @@ check-git || (
     log-info "Git repository not found, initializing git repository";
     init-git
 )
+update-git
 
 cd /config || log-fatal "Failed to change directory to /config"
 
@@ -169,7 +173,7 @@ if [ "$REPEAT_ACTIVE" != "true" ]; then
 fi
 
 # Watch for changes in the config directory
-inotifywait -m -r -e modify,create,delete --format '%w%f' --excludei '\.git/' . | while read -r file; do
+inotifywait -m -r -e modify,create,delete --format '%w%f' --excludei '\.git/|\.tmp.*' . | while read -r file; do
     if git check-ignore -v --stdin <<< "$file" &>/dev/null; then
         continue
     fi
