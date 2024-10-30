@@ -19,37 +19,37 @@ RESTART_AUTO=$(jq --raw-output '.restart_auto' $CONFIG_PATH)
 RESTART_IGNORED_FILES=$(jq --raw-output '.restart_ignore | join(" ")' $CONFIG_PATH)
 
 # Log Function to log messages with a timestamp and log level
-function log {
+log() {
     local level=$1
     local message=$2
     echo "$(date +"%Y-%m-%d %H:%M:%S") [$level] - $message"
 }
 
-function log-info {
+log-info() {
     log "INFO" "$1"
 }
 
-function log-error {
+log-error() {
     log "ERROR" "$1"
 }
 
-function log-fatal {
+log-fatal() {
     log "FATAL" "$1"
     exit 1;
 }
 
-function commit-push {
+commit-push() {
     git add "$1"
     git commit -m "$2"
     git push origin "$GIT_BRANCH"
 }
 
-function pull {
+pull() {
     git pull origin "$GIT_BRANCH"
 }
 
 # Check if .git exists in the directory
-function check-git {
+check-git() {
     if [ -d "/config/.git" ]; then
         log-info "Git repository found"
         return 0
@@ -59,7 +59,7 @@ function check-git {
     fi
 }
 
-function setup-user-password {
+setup-user-password() {
     if [ -n "$GIT_REMOTE_USER" ]; then
         # Navigate to /config directory, exiting if it fails
         cd /config || log-fatal "Failed to change directory to /config"
@@ -96,7 +96,7 @@ password=${GIT_REMOTE_PASS}
 
 
 # Initialize git repository
-function init-git {
+init-git() {
     pushd /config || log-fatal "Failed to change directory to /config"
     git init || log-fatal "Failed to initialize git repository"
     log-info "Initialized git repository"
@@ -124,7 +124,7 @@ function init-git {
     popd || log-fatal "Failed to change directory to previous directory"
 }
 
-function pull-and-restart {
+pull-and-restart() {
     local CHANGED_FILES
 
     CHANGED_FILES=$(git fetch && git diff --name-only ..origin/"$GIT_BRANCH")
@@ -181,7 +181,7 @@ INOTIFY_PID=$!
 
 # Periodically pull changes from git using watch
 export -f pull-and-restart
-watch -n "$REPEAT_INTERVAL" pull-and-restart &
+watch -n "$REPEAT_INTERVAL" "bash -c pull-and-restart" &
 WATCH_PID=$!
 
 # Catch kill signals and kill processes
