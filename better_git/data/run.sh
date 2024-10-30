@@ -175,7 +175,7 @@ inotifywait -m -r -e modify,create,delete --format '%w%f' --excludei '\.git/' . 
     fi
 
     log-info "Change detected in $file"
-    commit-push "$file" "Change detected in $file"
+    commit-push "." "Change detected in $file"
 done &
 INOTIFY_PID=$!
 
