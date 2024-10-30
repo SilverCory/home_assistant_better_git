@@ -127,7 +127,7 @@ init-git() {
 pull-and-restart() {
     local CHANGED_FILES
 
-    CHANGED_FILES=$(git fetch && git diff --name-only ..origin/"$GIT_BRANCH")
+    CHANGED_FILES=$(git fetch && git diff --name-only "..origin/$GIT_BRANCH")
     if [ -z "${CHANGED_FILES}" ] || ! echo "${CHANGED_FILES}" | grep -q -vE "${RESTART_IGNORED_FILES}"; then
         log-info "No changes detected"
         return
