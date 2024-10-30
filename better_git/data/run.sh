@@ -173,7 +173,7 @@ if [ "$REPEAT_ACTIVE" != "true" ]; then
 fi
 
 # Watch for changes in the config directory
-inotifywait -m -r -e modify,create,delete --format '%w%f' --excludei '\.git/|\.tmp.*' . | while read -r file; do
+inotifywait -m -r -e modify,create,delete --format '%w%f' --excludei '(^|/)\.git(/|$)|(^|/)\.tmp.*' . | while read -r file; do
     if git check-ignore -v --stdin <<< "$file" &>/dev/null; then
         continue
     fi
