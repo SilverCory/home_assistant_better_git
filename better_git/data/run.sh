@@ -181,6 +181,7 @@ INOTIFY_PID=$!
 
 # Periodically pull changes from git using watch
 export -f pull-and-restart
+export GIT_BRANCH RESTART_IGNORED_FILES RESTART_AUTO
 watch -n "$REPEAT_INTERVAL" "bash -c pull-and-restart" &
 WATCH_PID=$!
 
