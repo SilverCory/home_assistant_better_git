@@ -180,7 +180,8 @@ done &
 INOTIFY_PID=$!
 
 # Periodically pull changes from git using watch
-watch -n "$REPEAT_INTERVAL" "bash -c pull-and-restart" &
+export -f pull-and-restart
+watch -n "$REPEAT_INTERVAL" pull-and-restart &
 WATCH_PID=$!
 
 # Catch kill signals and kill processes

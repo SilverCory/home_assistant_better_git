@@ -1,5 +1,5 @@
 ---
-version: 0.0.5
+version: 0.0.6
 slug: better-git
 name: Better Git
 description: A better git addon for Home Assistant
