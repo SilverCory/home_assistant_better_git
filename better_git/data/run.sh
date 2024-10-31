@@ -140,15 +140,17 @@ pull-and-restart() {
     pull
 
     # Check if Home Assistant config is valid
+    log-info "Checking configurations..."
     if ! ha core check; then
         log-error "Invalid Home Assistant configuration"
         return
     fi
+    log-info "!!! Core Check Successful !!!"
 
     if [ "$RESTART_AUTO" == "true" ]; then
-        log-info "Restarting Home Assistant"
+        log-info "!!! Restarting Home Assistant !!!"
         ha core restart
-        log-info "Changes applied successfully"
+        log-info "!!! Changes applied successfully !!!"
     fi
 
 }
