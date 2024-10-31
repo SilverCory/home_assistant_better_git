@@ -96,8 +96,8 @@ password=${GIT_REMOTE_PASS}
 
 update-git() {
       # Set git user
-      git config --global user.email "$GIT_LOCAL_EMAIL"
-      git config --global user.name "$GIT_LOCAL_NAME"
+      git config user.email "$GIT_LOCAL_EMAIL"
+      git config user.name "$GIT_LOCAL_NAME"
       log-info "Set git user"
 
       setup-user-password
@@ -179,7 +179,7 @@ inotifywait -m -r --excludei '(^|/)\.git(/|$)|(^|/)tmp[^/]*$' -e close_write -e 
     fi
 
     log-info "Change detected in $file"
-    commit-push "." "Change detected in $file"
+    commit-push "$file" "Change detected in $file"
 done &
 INOTIFY_PID=$!
 
