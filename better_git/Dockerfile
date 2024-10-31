@@ -16,5 +16,7 @@ COPY data/template.gitignore /
 COPY data/run.sh /
 RUN chmod a+x /run.sh
 
+ENV SUPERVISOR_TOKEN;
+
 # Set shell
 CMD [ "/run.sh" ]
