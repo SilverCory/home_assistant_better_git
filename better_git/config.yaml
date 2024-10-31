@@ -1,5 +1,5 @@
 ---
-version: 1.0.2
+version: 1.0.3
 slug: better-git
 name: Better Git
 description: A better git addon for Home Assistant
@@ -12,8 +12,7 @@ arch:
   - amd64
   - i386
 boot: manual
-hassio_api: true
-hassio_role: admin
+homeassistant_api: true
 image: ghcr.io/silvercory/home-assistant-better-git_{arch}
 init: false
 map:
