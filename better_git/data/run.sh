@@ -158,9 +158,9 @@ check-git || (
     log-info "Git repository not found, initializing git repository";
     init-git
 )
-update-git
 
 cd /config || log-fatal "Failed to change directory to /config"
+update-git
 
 if [ "$REPEAT_ACTIVE" != "true" ]; then
     log-info "Repeat is not active, committing, pushing and pulling once"
