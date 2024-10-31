@@ -18,10 +18,6 @@ REPEAT_INTERVAL=$(jq --raw-output '.repeat_interval' $CONFIG_PATH)
 RESTART_AUTO=$(jq --raw-output '.restart_auto' $CONFIG_PATH)
 RESTART_IGNORED_FILES=$(jq --raw-output '.restart_ignore | join(" ")' $CONFIG_PATH)
 
-echo "Token: $SUPERVISOR_TOKEN"
-env
-echo "Dumped env..."
-
 # Log Function to log messages with a timestamp and log level
 log() {
     local level=$1
@@ -165,8 +161,6 @@ check-git || (
 
 cd /config || log-fatal "Failed to change directory to /config"
 update-git
-
-ha info
 
 if [ "$REPEAT_ACTIVE" != "true" ]; then
     log-info "Repeat is not active, committing, pushing and pulling once"

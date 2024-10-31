@@ -12,7 +12,8 @@ arch:
   - amd64
   - i386
 boot: manual
-homeassistant_api: true
+hassio_api: true
+hassio_role: homeassistant
 image: ghcr.io/silvercory/home-assistant-better-git_{arch}
 init: false
 map:
