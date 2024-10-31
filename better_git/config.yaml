@@ -1,5 +1,5 @@
 ---
-version: 1.0.0
+version: 1.0.1
 slug: better-git
 name: Better Git
 description: A better git addon for Home Assistant
@@ -26,7 +26,7 @@ schema:
   git_local_email: str
   git_local_name: str
   git_ignore_init:
-    - str
+    - str?
   restart_auto: bool
   restart_ignore:
       - str
@@ -39,7 +39,6 @@ options:
   git_remote_pass: null
   git_local_email: null
   git_local_name: null
-  git_ignore_init: []
   restart_auto: false
   restart_ignore:
     - ui-lovelace.yaml
