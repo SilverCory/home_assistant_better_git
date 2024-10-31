@@ -143,7 +143,7 @@ pull-and-restart() {
     log-info "Checking configurations..."
     if ! ha core check; then
         log-error "Invalid Home Assistant configuration"
-        return
+        exit 1;
     fi
     log-info "!!! Core Check Successful !!!"
 

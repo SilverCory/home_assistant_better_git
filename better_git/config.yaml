@@ -3,7 +3,7 @@ version: 1.0.8
 slug: better-git
 name: Better Git
 description: A better git addon for Home Assistant
-url: https://github.com/silvercory/addons/tree/master
+url: https://github.com/SilverCory/home_assistant_better_git
 advanced: true
 arch:
   - armhf
