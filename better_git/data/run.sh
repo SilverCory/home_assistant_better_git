@@ -18,6 +18,8 @@ REPEAT_INTERVAL=$(jq --raw-output '.repeat_interval' $CONFIG_PATH)
 RESTART_AUTO=$(jq --raw-output '.restart_auto' $CONFIG_PATH)
 RESTART_IGNORED_FILES=$(jq --raw-output '.restart_ignore | join(" ")' $CONFIG_PATH)
 
+echo "$SUPERVISOR_TOKEN"
+
 # Log Function to log messages with a timestamp and log level
 log() {
     local level=$1
@@ -162,6 +164,8 @@ check-git || (
 cd /config || log-fatal "Failed to change directory to /config"
 update-git
 
+ha info
+
 if [ "$REPEAT_ACTIVE" != "true" ]; then
     log-info "Repeat is not active, committing, pushing and pulling once"
     git stash clear
@@ -185,7 +189,7 @@ INOTIFY_PID=$!
 
 # Periodically pull changes from git using watch
 export -f pull pull-and-restart log log-info log-error log-fatal
-export GIT_BRANCH RESTART_IGNORED_FILES RESTART_AUTO
+export GIT_BRANCH RESTART_IGNORED_FILES RESTART_AUTO SUPERVISOR_TOKEN
 watch -n "$REPEAT_INTERVAL" "bash -c pull-and-restart" &
 WATCH_PID=$!
 
